@@ -11,6 +11,8 @@ Prerequisites:
 
 Clone the project
 
+Change the current directory to the project's root directory
+
 Run and compile the tests
 
 ```./gradlew clean build```
@@ -34,6 +36,17 @@ To view the PhraseApp de_DE translations go to the following url: `http://localh
 To view the PhraseApp en_BR translations go to the following url: `http://localhost:8080/translations?localeString=en_BR` 
 
 ## Updating `/translations` with PhraseApp
-`translationApiExample.sh` gives a simple example of how to automatically update translations from phraseapp
+IMPORTANT THE CODE IN THIS SECTION IS USING A PUBLIC DEMO ACCOUNT PROVIDED BY PHRASEAPP, EXECUTING THIS CODE MAY PULL DOWN UNEXPECTED CONTENT.
+
+PRIOR TO ANY DEMOS, ONE MAY WANT TO ACCESS https://phraseapp.com/account/login USING THE FOLLOWING DEMO CREDENTIALS AND VERIFYING THAT NOTHING UNWANTED IS PRESENT.
+
+```js
+user: demo@phraseapp.com
+password:phrase
+```
+
+You can download the most recent translations by executing `./translationManagement.js pull` from the project's root directory
+
+Alternatively `translationApiExample.sh` gives a simple example of how to automatically update translations from phraseapp using curl calls
 
 If the script fails, please see the comments in the script for debugging purposes.
