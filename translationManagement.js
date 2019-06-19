@@ -29,13 +29,11 @@ https.get("https://api.phraseapp.com/api/v2/projects", options, function(res){
 
             https.get("https://api.phraseapp.com/api/v2/projects/" + projectId + "/locales", options, function(res2){
                 var data2 = '';
-                //console.log("bob")
                 res2.on('data', function(chunk){
                     data2 += chunk;
                 })
                 res2.on('end', function(){
                     var localesResponse = JSON.parse(data2);
-                    //console.dir(localesResponse);
                     localesResponse.forEach(function(locale){pullTranslationForLocale(locale, projectId, 'properties', writeOutFile)})
                 })
             });

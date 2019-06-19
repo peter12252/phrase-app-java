@@ -3,6 +3,12 @@ This repository serves as a demo project for using PhraseApp with Spring Boot Ja
 
 ## Initialization and First Run
 
+Prerequisites:
+ - Java 1.8 (Corretto)
+ - Node 10+
+ - Git
+ - Bash shell
+
 Clone the project
 
 Run and compile the tests
