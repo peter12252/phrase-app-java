@@ -53,7 +53,7 @@ public class PhraseAppController {
             Enumeration<String> keys = resourceBundle.getKeys();
             while(keys.hasMoreElements()){
                 String key = keys.nextElement();
-                System.out.println("pushing key: " + key);
+                //System.out.println("pushing key: " + key);
                 map.put(key, resourceBundle.getObject(key));
             }
         }
