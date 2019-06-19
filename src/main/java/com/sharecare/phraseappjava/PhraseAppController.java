@@ -26,4 +26,12 @@ public class PhraseAppController {
         map.put("Hi", this.resourceBundle.getString("hi"));
         return map;
     }
+
+    @ResponseBody
+    @RequestMapping("/translations")
+    public Map getTranslations(){
+        Map<String, String> map = new HashMap<>();
+        map.put("Hi", this.resourceBundle.getString("hi"));
+        return map;
+    }
 }
