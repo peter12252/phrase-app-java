@@ -14,36 +14,62 @@ var options = {
     auth:phraseAppUser+":" + phraseAppPw
 };
 
-https.get("https://api.phraseapp.com/api/v2/projects", options, function(res){
-    var data = '';
-    res.on('data', function(chunk){
-        data += chunk;
-    })
-
-    res.on('end', function(){
-        var projectsResponse = JSON.parse(data);
-        var candidateProjects = projectsResponse.filter(function(project){return project.name===targetApplication})
-        if(candidateProjects.length > 0){
-            var projectId = candidateProjects[0].id;
-            console.log("Using project id: " + projectId);
-
-            https.get("https://api.phraseapp.com/api/v2/projects/" + projectId + "/locales", options, function(res2){
-                var data2 = '';
-                res2.on('data', function(chunk){
-                    data2 += chunk;
-                })
-                res2.on('end', function(){
-                    var localesResponse = JSON.parse(data2);
-                    localesResponse.forEach(function(locale){pullTranslationForLocale(locale, projectId, 'properties', writeOutFile)})
-                })
-            });
-
-        } else {
-            console.error("Failed to locate any valid projects")
+if(process.argv.length > 2){
+    if(process.argv[2] === "pull"){
+        console.log('pulling translations')
+        pullTranslations()
+    } else {
+        if(process.argv[2] === "push"){
+            console.log("currently not supported")
         }
+    }
 
-    })
-});
+} else {
+    console.log("run `" + process.argv[1] + " pull`, to fetch new translations")
+}
+
+function pullTranslations(){
+    getTargetProject(getLocalesForProject)
+}
+
+function getTargetProject(processProject){
+    https.get("https://api.phraseapp.com/api/v2/projects", options, function(res){
+        var data = '';
+        res.on('data', function(chunk){
+            data += chunk;
+        })
+
+        res.on('end', function(){
+            var projectsResponse = JSON.parse(data);
+            var candidateProjects = projectsResponse.filter(function(project){return project.name===targetApplication})
+            if(candidateProjects.length > 0){
+                var project = candidateProjects[0]
+                var projectId = project.id;
+                console.log("Using project id: " + projectId);
+
+                processProject(project)
+
+            } else {
+                console.error("Failed to locate any valid projects")
+            }
+
+        })
+    });
+}
+
+function getLocalesForProject(project){
+    var projectId = project.id;
+    https.get("https://api.phraseapp.com/api/v2/projects/" + projectId + "/locales", options, function(res2){
+        var data2 = '';
+        res2.on('data', function(chunk){
+            data2 += chunk;
+        })
+        res2.on('end', function(){
+            var localesResponse = JSON.parse(data2);
+            localesResponse.forEach(function(locale){pullTranslationForLocale(locale, projectId, 'properties', writeOutFile)})
+        })
+    });
+}
 
 function pullTranslationForLocale(locale, projectId, format, handleOutput){
     var id = locale.id;
