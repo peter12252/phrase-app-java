@@ -3,9 +3,7 @@ package com.sharecare.phraseappjava;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Locale;
-import java.util.Properties;
-import java.util.ResourceBundle;
+import java.util.*;
 
 @Configuration
 public class TestConfig {
@@ -23,4 +21,14 @@ public class TestConfig {
         return resourceBundle;
     }
 
+    @Bean
+    public Map<String, ResourceBundle> phraseAppTranslations(){
+        Map<String, ResourceBundle> phraseAppTranslations = new HashMap<>();
+
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("translations.PhraseAppBundle");
+
+        phraseAppTranslations.put("default", resourceBundle);
+
+        return phraseAppTranslations;
+    }
 }

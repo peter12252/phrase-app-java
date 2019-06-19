@@ -3,9 +3,7 @@ package com.sharecare.phraseappjava;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Locale;
-import java.util.Properties;
-import java.util.ResourceBundle;
+import java.util.*;
 
 @Configuration
 public class Config {
@@ -20,6 +18,19 @@ public class Config {
 
         ResourceBundle resourceBundle = ResourceBundle.getBundle("translations.MessagesBundle", currentLocale);
         return resourceBundle;
+    }
+
+    @Bean
+    public Map<String, ResourceBundle> phraseAppTranslations(){
+        Map<String, ResourceBundle> phraseAppTranslations = new HashMap<>();
+
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("translations.PhraseAppBundle");
+
+        phraseAppTranslations.put("default", ResourceBundle.getBundle("translations.PhraseAppBundle", new Locale("en", "GB")));
+        phraseAppTranslations.put("de_DE", ResourceBundle.getBundle("translations.PhraseAppBundle", new Locale("de", "DE")));
+        phraseAppTranslations.put("en_GB", ResourceBundle.getBundle("translations.PhraseAppBundle", new Locale("en", "GB")));
+
+        return phraseAppTranslations;
     }
 
 }
