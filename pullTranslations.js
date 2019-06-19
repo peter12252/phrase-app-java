@@ -71,8 +71,8 @@ function writeOutFile(fileContent, locale, format){
     var processedCode = rawCode.replace("-","_");
     var fileTarget = "./src/main/resources/translations/PhraseAppBundle_" + processedCode + "." + format;
     console.dir(fileTarget);
-    // fs.writeFile(fileTarget, fileContent, function(err){
-    //     if(err) throw err;
-    //     console.log('Overwrote: ' + fileTarget);
-    // })
+    fs.writeFile(fileTarget, fileContent, function(err){
+        if(err) throw err;
+        console.log('Overwrote: ' + fileTarget);
+    })
 }
