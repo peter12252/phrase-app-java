@@ -30,6 +30,7 @@ public class Config {
         ResourceBundle resourceBundleEnGB = PropertyResourceBundle.getBundle("translations.PhraseAppBundle", enGBLocale);
         ResourceBundle resourceBundleDeDe = PropertyResourceBundle.getBundle("translations.PhraseAppBundle", deDELocale);
 
+
         System.out.println("Config: resourceBundleEnGB" + resourceBundleEnGB);
         System.out.println("Config: resourceBundleDeDe" + resourceBundleDeDe);
         System.out.println("Config: resourceBundleEnGB keys" + resourceBundleEnGB.keySet());
