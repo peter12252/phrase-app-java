@@ -54,7 +54,7 @@ public class PhraseAppController {
             while(keys.hasMoreElements()){
                 String key = keys.nextElement();
                 System.out.println("pushing key: " + key);
-                map.put(key, this.resourceBundle.getObject(key));
+                map.put(key, resourceBundle.getObject(key));
             }
         }
 
