@@ -1,6 +1,7 @@
 package com.sharecare.phraseappjava;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,9 +19,12 @@ public class PhraseAppController {
     private Map<String, ResourceBundle> phraseAppTranslations;
 
     @Autowired
-    public PhraseAppController(ResourceBundle resourceBundle, Map<String, ResourceBundle> phraseAppTranslations){
+    public PhraseAppController(ResourceBundle resourceBundle, @Qualifier("translations") Map<String, ResourceBundle> phraseAppTranslations){
         this.resourceBundle = resourceBundle;
         this.phraseAppTranslations = phraseAppTranslations;
+        System.out.println("Controller-phraseAppTranslations" + phraseAppTranslations);
+        System.out.println("Controller phraseAppTranslations keys" + phraseAppTranslations.keySet());
+        System.out.println("Controller en_GB translations" + phraseAppTranslations.get("en_GB"));
     }
 
     @ResponseBody
@@ -33,8 +37,8 @@ public class PhraseAppController {
 
     @ResponseBody
     @RequestMapping("/translations")
-    public Map getTranslations(@RequestParam(required = false) String localeString){
-        Map<String, String> map = new HashMap<>();
+    public Map<String, Object> getTranslations(@RequestParam(required = false) String localeString){
+        Map<String, Object> map = new HashMap<>();
 
         System.out.println(localeString);
 
@@ -49,7 +53,8 @@ public class PhraseAppController {
             Enumeration<String> keys = resourceBundle.getKeys();
             while(keys.hasMoreElements()){
                 String key = keys.nextElement();
-                map.put(key, this.resourceBundle.getString(key));
+                System.out.println("pushing key: " + key);
+                map.put(key, this.resourceBundle.getObject(key));
             }
         }
 
