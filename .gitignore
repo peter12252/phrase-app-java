@@ -4,7 +4,6 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-.phraseapp.yml
 
 ### STS ###
 .apt_generated

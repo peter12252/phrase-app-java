@@ -1,0 +1,13 @@
+phraseapp:
+  access_token: ffbd0879ff3a090e68f8f86035e63005afa316243f77bd4f62560f8ee512d454
+  project_id: 2dc9578620360b0a4758877a21420981
+  push:
+    sources:
+    - file: ./src/main/resources/translations/PhraseAppBundle_<locale_name>.properties
+      params:
+        file_format: properties
+  pull:
+    targets:
+    - file: ./src/main/resources/translations/PhraseAppBundle_<locale_name>.properties
+      params:
+        file_format: properties
